@@ -11,7 +11,6 @@ const getMovies = async (filterOptions) => {
     return response;
 }
 
-
 export {
     getMovies
 }

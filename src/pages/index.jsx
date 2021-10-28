@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import {React, useState} from 'react';
 
 // Componentes
@@ -31,12 +30,20 @@ function MainPage () {
         });
     }
 
+    const clearFilmList = () => {
+        setResultData(null);
+        setSearchData({
+            ...searchData,
+            query: ''
+        });
+    };
+
     const searchFilm = async () => {
 
         if (Object.keys(searchData).length === 0 || searchData.query === '') {
             setErrorData({
                 type: 'danger',
-                text: 'Para buscar debes ingresar necesariamente un nombre de una película o serie.'
+                text: 'Para buscar debes ingresar necesariamente el nombre de una película o serie.'
             });
             return;
         }
@@ -80,6 +87,7 @@ function MainPage () {
                         id="input-movie-name"
                         type="text" 
                         name="query" 
+                        value={searchData.query}
                         className="form-control col-md-4" 
                         placeholder="Película o serie" 
                         onChange={handleChange}
@@ -95,6 +103,16 @@ function MainPage () {
             >
                 Buscar
             </button>
+
+            {resultData !== null ? (
+                <button 
+                style={{marginLeft: '10px'}}
+                className="btn btn-danger mt-4" 
+                onClick={clearFilmList}
+                >
+                    Borrar resultados
+                </button>
+            ) : null}
 
             <div className="row d-flex justify-content-center">
                 <div className="col-md-5">
@@ -129,16 +147,6 @@ function MainPage () {
         
     )
 }
-
-$(window).on('load', function () {
-    $('#input-movie-name').on('input', function () {
-        if ($(this).val().length >= 10) {
-            $(this).val('');
-            alert('Se ha superado el límite de 10 caractéres...');
-        }
-
-    });
-});
 
 
 export default MainPage;

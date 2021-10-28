@@ -23,6 +23,15 @@ const SingleFilm = ({film}) => {
                         <p>Rating promedio: <strong>{film.voteAverage}</strong></p>
                         <p>Cantidad de votos: <strong>{film.voteCount}</strong></p>
                         <p>Fecha de estreno: <strong>{film.releaseDate}</strong></p>
+
+                        {film.adult ?
+                            <strong>
+                                <p class="text-danger">
+                                    [!] Contenido para adultos
+                                </p>
+                            </strong>
+                        : null}
+
                     </div>
                 </div>
             </div>
